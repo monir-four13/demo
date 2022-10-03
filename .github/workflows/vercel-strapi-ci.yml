@@ -1,0 +1,49 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Vercel CI Mock Secrets Echoing 
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Secret Printer
+        uses: hashicorp/vault-action@v2.4.0
+        with:
+          url: http://127.0.0.1:8200/
+          tlsSkipVerify: true
+          token: ${{ secrets.VAULT_TOKEN }}
+          secrets:
+            secret/data/vault-demo SONAR_URL
+            secret/data/vault-demo SONAR_LOGIN
+            secret/data/vault-demo VERCEL_PROJECT_JSON
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Setup Sonar Scanner client
+      run: |
+        echo ${{env.SONAR_URL}}
+        echo ${{env.SONAR_LOGIN}}
+
+    - name: create-json
+      uses: jsdaniell/create-json@1.1.2
+      run: |
+        echo ${{env.VERCEL_PROJECT_JSON}}
+        echo ${{env.SONAR_LOGIN}}
