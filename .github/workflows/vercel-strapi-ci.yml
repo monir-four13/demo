@@ -26,7 +26,7 @@ jobs:
       with:
         url: https://127.0.0.1:8200/
         token: ${{ secrets.VAULT_TOKEN }}
-        secrets:
+        secrets: |
           secret/data/vault-demo SONAR_URL
           secret/data/vault-demo SONAR_LOGIN
           secret/data/vault-demo VERCEL_PROJECT_JSON
