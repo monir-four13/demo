@@ -22,15 +22,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Secret Printer
-        uses: hashicorp/vault-action@v2.4.0
-        with:
-          url: http://127.0.0.1:8200/
-          tlsSkipVerify: true
-          token: ${{ secrets.VAULT_TOKEN }}
-          secrets:
-            secret/data/vault-demo SONAR_URL
-            secret/data/vault-demo SONAR_LOGIN
-            secret/data/vault-demo VERCEL_PROJECT_JSON
+      uses: hashicorp/vault-action@v2.4.0
+      with:
+        url: http://127.0.0.1:8200/
+        tlsSkipVerify: true
+        token: ${{ secrets.VAULT_TOKEN }}
+        secrets:
+          secret/data/vault-demo SONAR_URL
+          secret/data/vault-demo SONAR_LOGIN
+          secret/data/vault-demo VERCEL_PROJECT_JSON
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
