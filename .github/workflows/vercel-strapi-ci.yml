@@ -39,10 +39,10 @@ jobs:
 
     - name: Setup Sonar Scanner client
       run: |
-        echo ${{env.SONAR_URL}}
-        echo ${{env.SONAR_LOGIN}}
+        echo "$env.SONAR_URL"
+        echo "$env.SONAR_LOGIN"
 
     - name: create-json
       run: |
-        echo ${{env.VERCEL_PROJECT_JSON}}
-        echo ${{env.SONAR_LOGIN}}
+        echo "$env.VERCEL_PROJECT_JSON"
+        echo "$env.SONAR_LOGIN"
