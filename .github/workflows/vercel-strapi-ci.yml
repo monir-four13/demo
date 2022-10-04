@@ -24,7 +24,7 @@ jobs:
     - name: Secret Printer
       uses: hashicorp/vault-action@v2.4.0
       with:
-        url: https://127.0.0.1:8200/
+        url: ${{ secrets.VAULT_URL }}
         tlsSkipVerify: true
         token: ${{ secrets.VAULT_TOKEN }}
         secrets: |
