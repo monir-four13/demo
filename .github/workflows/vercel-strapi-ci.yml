@@ -25,7 +25,7 @@ jobs:
       uses: hashicorp/vault-action@v2.4.0
       with:
         url: https://127.0.0.1:8200/
-        caCertificate: /home/monir/tests/vault-test-final/tls/ca.crt
+        tlsSkipVerify: true
         token: ${{ secrets.VAULT_TOKEN }}
         secrets: |
           secret/data/vault-demo SONAR_URL ;
